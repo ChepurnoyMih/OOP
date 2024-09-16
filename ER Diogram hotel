@@ -22,3 +22,35 @@ CREATE TABLE Booking (
     Prepayment DECIMAL(10,2) NOT NULL,
     TotalSum DECIMAL(10,2) NOT NULL
 );
+
+
+//код для dbdiogram
+TABLE Client {
+    ID_Client INT [PRIMARY KEY]
+    Surname VARCHAR(50)
+    Name VARCHAR(50) 
+    Patronymic VARCHAR(50) 
+    Comment VARCHAR(200)
+}
+
+TABLE Room {
+    ID_Room INT [PRIMARY KEY]
+    Capacity INT 
+    Comfort VARCHAR(20) 
+    Price DECIMAL(10,2) 
+}
+
+TABLE Booking {
+    ID_Booking INT [PRIMARY KEY]
+    ID_Client INT 
+    ID_Room INT 
+    CheckIn DATE 
+    CheckOut DATE 
+    Prepayment DECIMAL(10,2) 
+    TotalSum DECIMAL(10,2) 
+}
+
+
+Ref: Client.ID_Client < Booking.ID_Client
+
+Ref: Room.ID_Room < Booking.ID_Room
