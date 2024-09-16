@@ -1,0 +1,24 @@
+CREATE TABLE Client (
+    ID_Client INT PRIMARY KEY,
+    Surname VARCHAR(50) NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    Patronymic VARCHAR(50) NOT NULL,
+    Comment VARCHAR(200)
+);
+
+CREATE TABLE Room (
+    ID_Room INT PRIMARY KEY,
+    Capacity INT NOT NULL,
+    Comfort VARCHAR(20) NOT NULL,
+    Price DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE Booking (
+    ID_Booking INT PRIMARY KEY,
+    ID_Client INT FOREIGN KEY REFERENCES Client(ID_Client),
+    ID_Room INT FOREIGN KEY REFERENCES Room(ID_Room),
+    CheckIn DATE NOT NULL,
+    CheckOut DATE NOT NULL,
+    Prepayment DECIMAL(10,2) NOT NULL,
+    TotalSum DECIMAL(10,2) NOT NULL
+);
