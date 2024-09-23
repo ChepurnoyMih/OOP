@@ -1,0 +1,109 @@
+ public class Client
+    {
+        private int id_Client;
+        private string surname;
+        private string name;
+        private string patronymic;
+        private string comment;
+
+        public int ID_Client { get { return id_Client; } set { id_Client = value; } }
+        public string Surname { get { return surname; } set { surname = value; } }
+        public string Name { get { return name; } set { name = value; } }
+        public string Patronymic { get { return patronymic; } set { patronymic = value; } }
+        public string Comment { get { return comment; } set { comment = value; } }
+
+        public static Client CreateClient(int id, string surname, string name, string patronymic, string comment)
+        {
+            if (ClientValidator.ValidateID(id) &&
+                ClientValidator.ValidateSurname(surname) &&
+                ClientValidator.ValidateName(name) &&
+                ClientValidator.ValidatePatronymic(patronymic) &&
+                ClientValidator.ValidateComment(comment))
+            {
+                Client client = new Client
+                {
+                    ID_Client = id,
+                    Surname = surname,
+                    Name = name,
+                    Patronymic = patronymic,
+                    Comment = comment
+                };
+                return client;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    public static class ClientValidator
+    {
+        public static bool ValidateID(int id)
+        {            
+            return id > 0;
+        }
+
+        public static bool ValidateSurname(string surname)
+        {            
+            return !string.IsNullOrEmpty(surname);
+        }
+
+        public static bool ValidateName(string name)
+        {            
+            return !string.IsNullOrEmpty(name);
+        }
+
+        public static bool ValidatePatronymic(string patronymic)
+        {            
+            return !string.IsNullOrEmpty(patronymic);
+        }
+
+        public static bool ValidateComment(string comment)
+        {            
+            return !string.IsNullOrEmpty(comment);
+        }
+    }
+    class Program
+    {        
+        static void DisplayClient(Client client)
+        {
+            if (client != null)
+            {
+                Console.WriteLine("\nИнформация о клиенте:");
+                Console.WriteLine($"ID: {client.ID_Client}");
+                Console.WriteLine($"Фамилия: {client.Surname}");
+                Console.WriteLine($"Имя: {client.Name}");
+                Console.WriteLine($"Отчество: {client.Patronymic}");
+                Console.WriteLine($"Комментарий: {client.Comment}");
+            }
+            else
+            {
+                Console.WriteLine("Некорректные данные клиента. Проверьте введенные значения.");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите данные клиента:");
+
+            Console.Write("ID: ");
+            int id = int.Parse(Console.ReadLine());
+
+            Console.Write("Фамилия: ");
+            string surname = Console.ReadLine();
+
+            Console.Write("Имя: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Отчество: ");
+            string patronymic = Console.ReadLine();
+
+            Console.Write("Комментарий: ");
+            string comment = Console.ReadLine();
+
+            Client client = Client.CreateClient(id, surname, name, patronymic, comment);
+            DisplayClient(client);
+            Console.WriteLine("Hello World!");
+        }
+        
+    }
